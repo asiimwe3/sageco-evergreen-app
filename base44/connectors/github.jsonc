@@ -1,9 +1,0 @@
-{
-  "type": "github",
-  "scopes": [
-    "repo",
-    "workflow",
-    "read:user",
-    "read:org"
-  ]
-}
