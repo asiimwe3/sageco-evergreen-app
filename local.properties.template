@@ -1,0 +1,9 @@
+# Copy this to local.properties (already in .gitignore)
+# Fill in your actual values before building
+
+sdk.dir=/path/to/your/Android/sdk
+
+KEYSTORE_PATH=sageco-release.jks
+KEY_ALIAS=sageco
+STORE_PASSWORD=your_keystore_password_here
+KEY_PASSWORD=your_key_password_here
