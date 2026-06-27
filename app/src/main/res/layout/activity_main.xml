@@ -1,11 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#0a0f1e">
 
+    <!-- WebView -->
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
-</RelativeLayout>
+    <!-- SPLASH SCREEN -->
+    <LinearLayout
+        android:id="@+id/splash_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#0a0f1e"
+        android:padding="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAGECO"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:textColor="#d4a017"
+            android:letterSpacing="0.15"
+            android:fontFamily="sans-serif-black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EVERGREEN"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:letterSpacing="0.3"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Real Estate Platform"
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:layout_marginTop="8dp"/>
+
+        <ProgressBar
+            android:layout_width="180dp"
+            android:layout_height="3dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginTop="48dp"
+            android:indeterminate="true"
+            android:progressTint="#d4a017"
+            android:indeterminateTint="#d4a017"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loading…"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:layout_marginTop="12dp"/>
+
+    </LinearLayout>
+
+    <!-- OFFLINE SCREEN -->
+    <LinearLayout
+        android:id="@+id/offline_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#0a0f1e"
+        android:padding="40dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📡"
+            android:textSize="64sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Internet Connection"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please check your connection\nand try again."
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/btn_retry"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:text="Retry"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#d4a017"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+</FrameLayout>
