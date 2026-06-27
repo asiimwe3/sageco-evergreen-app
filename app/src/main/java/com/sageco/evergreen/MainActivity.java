@@ -21,7 +21,8 @@ public class MainActivity extends Activity {
     private WebView webView;
     private LinearLayout splashScreen;
     private LinearLayout offlineScreen;
-    private static final String APP_URL = "https://sageco-evergreen.vercel.app";
+    private static final String APP_URL = "https://sageco-evergreen.vercel.app/?app=true";
+    private static final String APP_BASE = "https://sageco-evergreen.vercel.app";
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -33,7 +34,6 @@ public class MainActivity extends Activity {
         offlineScreen = findViewById(R.id.offline_screen);
         webView       = findViewById(R.id.webview);
 
-        // Configure WebView
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
@@ -46,13 +46,17 @@ public class MainActivity extends Activity {
         settings.setAllowFileAccess(false);
         settings.setAllowContentAccess(false);
 
+        // ── App Mode: inject custom User-Agent ──
+        // Next.js middleware detects "SagecoApp" and activates App Mode
+        String defaultUA = settings.getUserAgentString();
+        settings.setUserAgentString(defaultUA + " SagecoApp/1.0");
+
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                // Hide splash, show web content
                 splashScreen.setVisibility(View.GONE);
                 webView.setVisibility(View.VISIBLE);
             }
@@ -68,16 +72,16 @@ public class MainActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest req) {
                 String url = req.getUrl().toString();
-                if (url.startsWith("https://sageco-evergreen.vercel.app") ||
-                    url.startsWith("https://sageco-evergreen")) {
+                // Keep all sageco pages inside the WebView
+                if (url.startsWith(APP_BASE)) {
                     return false;
                 }
+                // External links open in browser
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 return true;
             }
         });
 
-        // Show splash then load
         splashScreen.setVisibility(View.VISIBLE);
         webView.setVisibility(View.GONE);
         offlineScreen.setVisibility(View.GONE);
@@ -89,7 +93,6 @@ public class MainActivity extends Activity {
             offlineScreen.setVisibility(View.VISIBLE);
         }
 
-        // Retry button
         findViewById(R.id.btn_retry).setOnClickListener(v -> {
             if (isOnline()) {
                 offlineScreen.setVisibility(View.GONE);
